@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Diplôme ISQP</title>
+
+<style>
+    body {
+        background: #f3f3f3;
+        margin: 0;
+        padding: 40px;
+        font-family: "Segoe UI", Calibri, sans-serif;
+        display: flex;
+        justify-content: center;
+    }
+
+    #carte {
+        width: 1050px;
+        background: #ffffff;
+        border: 8px solid #f1c40f;
+        border-radius: 14px;
+        padding: 60px 80px;
+        box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+
+        opacity: 0;
+        transform: scale(0.92);
+        animation: entree 1.2s ease-out forwards;
+    }
+
+    @keyframes entree {
+        0%   { opacity: 0; transform: scale(0.90); }
+        60%  { opacity: 1; transform: scale(1.02); }
+        100% { opacity: 1; transform: scale(1.00); }
+    }
+
+    .logo {
+        width: 180px;
+        display: block;
+        margin: 0 auto 25px auto;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 42px;
+        color: #333;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .ruban {
+        height: 5px;
+        background: #f1c40f;
+        margin: 30px 0 40px 0;
+        opacity: 0;
+        animation: rubanAnim 0.9s ease-out forwards;
+        animation-delay: .5s;
+    }
+
+    @keyframes rubanAnim {
+        0%   { width: 0; opacity: 0; }
+        100% { width: 100%; opacity: 1; }
+    }
+
+    .texte {
+        text-align: center;
+        font-size: 26px;
+        color: #444;
+        line-height: 1.6;
+        opacity: 0;
+        animation: texteAnim 1.3s ease-out forwards;
+        animation-delay: .8s;
+    }
+
+    @keyframes texteAnim {
+        0%   { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .score {
+        font-size: 52px;
+        font-weight: bold;
+        color: #27ae60;
+
+        margin: 25px 0 35px 0;
+
+        opacity: 0;
+        animation: scoreAnim 1.4s ease-out forwards;
+        animation-delay: 1.0s;
+    }
+
+    @keyframes scoreAnim {
+        0%   { opacity: 0; transform: scale(0.5); }
+        65%  { opacity: 1; transform: scale(1.18); color:#2ecc71; }
+        100% { opacity: 1; transform: scale(1.00); color:#27ae60; }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="carte">
+
+    <!-- Remplacer l’URL par l’image du logo hébergée en raw sur GitHub -->
+    <img class="logo" src="https://raw.githubusercontent.com/Eric94170/Dipl-me1/main/logo_la_poste.png">
+
+    <h1>Diplôme de moyenne ISQP</h1>
+    <div class="ruban"></div>
+
+    <div class="texte">
+        Bravo à la cellule S3C de<br>
+        <b id="site"></b>
+        <br><br>
+        pour sa moyenne ISQP de
+    </div>
+
+    <div id="score" class="score"></div>
+
+    <div class="texte">
+        sur la période<br>
+        <b id="periode"></b>
+    </div>
+
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    document.getElementById("site").innerText =
+        params.get("site") ?? "Site inconnu";
+
+    document.getElementById("score").innerText =
+        params.get("score") ?? "";
+
+    document.getElementById("periode").innerText =
+        "de " + (params.get("debut") ?? "") +
+        " à " + (params.get("fin") ?? "");
+</script>
+
+</body>
+</html>
